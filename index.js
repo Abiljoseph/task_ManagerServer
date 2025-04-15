@@ -3,6 +3,7 @@ const path = require("path");
 const bodyParser = require('body-parser');
 const connectDB = require("./src/config/db");
 const authRoutes = require("./src/routes/authRoutes");
+const taskRoutes = require("./src/routes/taskRoutes");
 require('dotenv').config();
 const cors = require('cors');
 
@@ -32,6 +33,7 @@ app.get("/about", (req, res) => {
 });
 
 app.use("/", authRoutes);
+app.use("/", taskRoutes);
 
 // Start server
 app.listen(PORT, () => {

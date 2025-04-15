@@ -1,6 +1,6 @@
 const User = require("../models/userModel.js");
 const bcrypt = require("bcryptjs");
-var jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 // this is signUp controller
 exports.signUp = async (req, res) => {
@@ -52,15 +52,14 @@ exports.signIn = async(req, res) => {
     if(!isValid){
       return res.status(400).json({message:"check your credantials"}) 
     }
-    let token1 = generateToken({id:user._id})
+    const token1 = generateToken(user._id);
     console.log("login success full")
     res.status(200).json({message:"logined successfully",token1, user})
 }
-const generateToken = (payload) => {
-  const secretKey = 'Abi123';
-  const options = {
-    expiresIn: '1h',
-  };
-  const token = jwt.sign(payload, secretKey, options);
-    return token;
+
+const generateToken = (id) => {
+  return jwt.sign({id}, "abil123", {
+    expiresIn: "1h",
+  }
+  );
 }
