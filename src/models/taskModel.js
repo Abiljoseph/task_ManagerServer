@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-const taskSchema = new mongoose.Schema({
+const taskSchema = mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -12,7 +12,7 @@ const taskSchema = new mongoose.Schema({
   projectId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project',
-    required: true
+    // required: true
   },
   assignedTo: {
     type: mongoose.Schema.Types.ObjectId,
@@ -50,9 +50,9 @@ const taskSchema = new mongoose.Schema({
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    // required: true
   },
-  createdAt: {
+  createdAt: { 
     type: Date,
     default: Date.now
   },
@@ -61,11 +61,8 @@ const taskSchema = new mongoose.Schema({
   }
 });
 
-taskSchema.pre('save', function (next) {
-  this.updatedAt = Date.now();
-  next();
-});
-
-const Task = mongoose.model('Task', taskSchema);
-
-export default Task;
+// taskSchema.pre('save', function (next) {
+//   this.updatedAt = Date.now();
+//   next();
+// });
+module.exports = mongoose.model('Task', taskSchema);

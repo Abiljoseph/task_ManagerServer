@@ -11,8 +11,8 @@ const app = express();
 const PORT = 5000;
 
 // View Engine
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'src', 'views'));
+// app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'src', 'views'));
 
 // Middleware
 app.use(express.static("public"));
@@ -23,14 +23,10 @@ app.use(bodyParser.json());
 // DB Connection
 connectDB();
 
-// Routes
 app.get("/", (req, res) => {
-    res.render('index', { title: "Home", message: 'Welcome to EJS' });
-});
+    res.send("server is running")
+})
 
-app.get("/about", (req, res) => {
-    res.render('about', { title: "About Us", info: "We love Node.js with EJS" });
-});
 
 app.use("/", authRoutes);
 app.use("/", taskRoutes);
